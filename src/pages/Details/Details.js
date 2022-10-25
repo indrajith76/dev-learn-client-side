@@ -1,21 +1,30 @@
 import React from "react";
 import { useLoaderData, Link } from "react-router-dom";
 import { FaUserCircle, FaStar, FaRegFilePdf } from "react-icons/fa";
+import { createRef } from "react";
+import ReactToPdf from "react-to-pdf";
 
 const Details = () => {
   const course = useLoaderData();
   const { id, title, author, rating, price, videoLink } = course;
+
+  const ref = createRef();
+
   return (
-    <div className="container mx-auto mb-10">
+    
+    <div className="container mx-auto mb-10" ref={ref}>
       <div className="w-3/4 my-5 mx-auto flex justify-between items-center">
         <h1 className="text-4xl text-slate-800 font-semibold">
           Details of this course
         </h1>
-        <button className="border-2 px-5 py-2 flex items-center gap-1 hover:shadow-lg rounded-md">
+        <ReactToPdf targetRef={ref} filename="code-example.pdf" x={-30} y={.5} scale={0.8}>
+        {({ toPdf }) => <button onClick={toPdf} className="border-2 px-5 py-2 flex items-center gap-1 hover:shadow-lg rounded-md">
           <FaRegFilePdf></FaRegFilePdf> Download PDF
-        </button>
+        </button>}
+      </ReactToPdf>
+        
       </div>
-      <iframe
+      <iframe  ref={ref}
         className="w-3/4 h-[70vh] mx-auto"
         src={`${videoLink}`}
         title="YouTube video player"
@@ -45,7 +54,9 @@ const Details = () => {
       </div>
       <div className="flex justify-center mt-10">
         <Link to={`/checkout/${id}`}>
-          <button className="bg-red-500 w-full py-2 px-10 font-medium text-white rounded-lg">Get Premium Access</button>
+          <button className="bg-red-500 w-full py-2 px-10 font-medium text-white rounded-lg">
+            Get Premium Access
+          </button>
         </Link>
       </div>
     </div>
