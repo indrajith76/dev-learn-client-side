@@ -16,7 +16,7 @@ const Courses = () => {
 
   return (
     <div className="flex container mx-auto">
-      <div className="w-1/5 bg-white border-r sticky top-0">
+      <div className="w-1/5 bg-white border-r ">
         <ul>
           {categories.map((category) => (
             <li
@@ -30,7 +30,7 @@ const Courses = () => {
           ))}
         </ul>
       </div>
-      <div className="w-4/5 grid grid-cols-3 gap-10 px-10 py-10">
+      <div className="w-4/5 grid md:grid-cols-2 lg:grid-cols-3 gap-10 px-10 py-10">
         {coursesCategory.map((course) => (
           <CourseCard key={course.id} course={course}></CourseCard>
         ))}
