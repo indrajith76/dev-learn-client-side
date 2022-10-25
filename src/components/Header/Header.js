@@ -1,22 +1,25 @@
 import { useState } from "react";
 import logo from "../../asset/logo.png";
 import { Link, NavLink } from "react-router-dom";
+import { BsCircleHalf } from "react-icons/bs";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
-    <div className="bg-gray-900">
+    <div className="bg-gray-900 sticky top-0 z-20">
       <div className="px-4 py-5 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8">
         <div className="relative flex items-center justify-between">
           <Link to="/" className="inline-flex items-center">
-            <img className="w-64" src={logo} alt="" />
+            <img className="w-32 lg:w-64" src={logo} alt="" />
           </Link>
           <ul className="flex items-center hidden space-x-8 lg:flex">
             <li>
               <NavLink
                 to="/"
-                style={({isActive})=> isActive ? {color:'#fb8b12'}:{color:'white'}}
+                style={({ isActive }) =>
+                  isActive ? { color: "#fb8b12" } : { color: "white" }
+                }
                 className="font-medium tracking-wide transition-colors duration-200"
                 end
               >
@@ -26,7 +29,9 @@ const Header = () => {
             <li>
               <NavLink
                 to="/courses"
-                style={({isActive})=> isActive ? {color:'#fb8b12'}:{color:'white'}}
+                style={({ isActive }) =>
+                  isActive ? { color: "#fb8b12" } : { color: "white" }
+                }
                 className="font-medium tracking-wide transition-colors duration-200"
               >
                 Courses
@@ -35,7 +40,9 @@ const Header = () => {
             <li>
               <NavLink
                 to="/faq"
-                style={({isActive})=> isActive ? {color:'#fb8b12'}:{color:'white'}}
+                style={({ isActive }) =>
+                  isActive ? { color: "#fb8b12" } : { color: "white" }
+                }
                 className="font-medium tracking-wide text-gray-100 transition-colors duration-200 hover:text-teal-accent-400"
               >
                 FAQ
@@ -44,7 +51,9 @@ const Header = () => {
             <li>
               <NavLink
                 to="/blogs"
-                style={({isActive})=> isActive ? {color:'#fb8b12'}:{color:'white'}}
+                style={({ isActive }) =>
+                  isActive ? { color: "#fb8b12" } : { color: "white" }
+                }
                 className="font-medium tracking-wide text-gray-100 transition-colors duration-200 hover:text-teal-accent-400"
               >
                 Blogs
@@ -53,7 +62,9 @@ const Header = () => {
             <li>
               <NavLink
                 to="/about"
-                style={({isActive})=> isActive ? {color:'#fb8b12'}:{color:'white'}}
+                style={({ isActive }) =>
+                  isActive ? { color: "#fb8b12" } : { color: "white" }
+                }
                 className="font-medium tracking-wide text-gray-100 transition-colors duration-200 hover:text-teal-accent-400"
               >
                 About us
@@ -68,10 +79,15 @@ const Header = () => {
               </Link>
             </li>
             <li>
-              
+              <span className="text-white cursor-pointer">
+                <BsCircleHalf />
+              </span>
             </li>
           </ul>
           <div className="lg:hidden">
+            <button className="text-gray-400 mr-2">
+              <BsCircleHalf />
+            </button>
             <button
               aria-label="Open Menu"
               title="Open Menu"
@@ -94,7 +110,7 @@ const Header = () => {
               </svg>
             </button>
             {isMenuOpen && (
-              <div className="absolute top-0 left-0 w-full z-10">
+              <div className="absolute top-0 left-0 w-full z-20">
                 <div className="p-5 bg-white border rounded shadow-sm">
                   <div className="flex items-center justify-between mb-4">
                     <div>
