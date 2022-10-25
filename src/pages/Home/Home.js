@@ -3,15 +3,19 @@ import "./Home.css";
 import AwesomeSlider from "react-awesome-slider";
 import "react-awesome-slider/dist/styles.css";
 import withAutoplay from "react-awesome-slider/dist/autoplay";
-import { useLoaderData } from "react-router-dom";
+import { useLoaderData, Link } from "react-router-dom";
 import CourseCard from "../../components/CourseCard/CourseCard";
 
 const AutoplaySlider = withAutoplay(AwesomeSlider);
 
 const Home = () => {
+  let fetureCourse;
   const courses = useLoaderData();
+  if (courses.length > 12) {
+    fetureCourse = courses.slice(0, 12);
+  }
   return (
-    <div className="2xl:container mx-auto">
+    <div className="2xl:container mx-auto mb-20">
       <AutoplaySlider
         play={true}
         cancelOnInteraction={false} // should stop playing on user interaction
@@ -75,12 +79,19 @@ const Home = () => {
           </div>
         </div>
       </AutoplaySlider>
-      <h2 className="text-5xl font-medium text-slate-800 my-16">Our Courses </h2>
+      <h2 className="text-5xl font-medium text-slate-800 my-16">
+        Our Courses{" "}
+      </h2>
 
       <div className="grid grid-cols-3 gap-8 container mx-auto">
-        {courses.map((course) => (
+        {fetureCourse.map((course) => (
           <CourseCard key={course.id} course={course}></CourseCard>
         ))}
+      </div>
+      <div className="flex justify-center my-20">
+        <Link to='/courses'>
+          <button className="bg-sky-500 w-full py-2 px-10 font-medium text-white rounded-lg">Visit More</button>
+        </Link>
       </div>
     </div>
   );
