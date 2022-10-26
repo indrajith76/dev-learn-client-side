@@ -2,9 +2,18 @@ import { useState } from "react";
 import logo from "../../asset/logo.png";
 import { Link, NavLink } from "react-router-dom";
 import { BsCircleHalf } from "react-icons/bs";
+import { useContext } from "react";
+import { AuthContext } from "../../contexts/AuthProvider";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { user, logOut } = useContext(AuthContext);
+
+  const handleSignOut = () => {
+    logOut()
+      .then(() => {})
+      .catch((error) => console.error(error));
+  };
 
   return (
     <div className="bg-gray-900 sticky top-0 z-20">
@@ -71,12 +80,28 @@ const Header = () => {
               </NavLink>
             </li>
             <li>
-              <Link
-                to="/login"
-                className="inline-flex items-center justify-center h-9 px-6 font-medium tracking-wide text-white transition duration-200 rounded shadow-md bg-sky-500 hover:bg-sky-600 focus:shadow-outline focus:outline-none"
-              >
-                Login
-              </Link>
+              {user?.uid && user ? (
+                <div className="flex items-center gap-7">
+                  <Link to="/profile">
+                    <img
+                      className="w-10 rounded-full"
+                      title={user.displayName}
+                      src={user?.photoURL}
+                      alt=""
+                    />
+                  </Link>
+                  <button onClick={handleSignOut} className="inline-flex items-center justify-center h-9 px-6 font-medium tracking-wide text-white transition duration-200 rounded shadow-md bg-sky-500 hover:bg-sky-600 focus:shadow-outline focus:outline-none">
+                    Logout
+                  </button>
+                </div>
+              ) : (
+                <Link
+                  to="/login"
+                  className="inline-flex items-center justify-center h-9 px-6 font-medium tracking-wide text-white transition duration-200 rounded shadow-md bg-sky-500 hover:bg-sky-600 focus:shadow-outline focus:outline-none"
+                >
+                  Login
+                </Link>
+              )}
             </li>
             <li>
               <span className="text-white cursor-pointer">
@@ -190,12 +215,30 @@ const Header = () => {
                         </Link>
                       </li>
                       <li>
-                        <Link
-                          to="/"
-                          className="inline-flex items-center justify-center w-full h-12 px-6 font-medium tracking-wide text-white transition duration-200 rounded shadow-md bg-sky-500 hover:bg-sky-600 focus:shadow-outline focus:outline-none"
-                        >
-                          Login
-                        </Link>
+                        {user?.uid && user ? (
+                          <>
+                            <Link to="/profile">
+                              <img
+                                className="w-10 rounded-full mb-5"
+                                title={user.displayName}
+                                src={user?.photoURL}
+                                alt=""
+                              />
+                            </Link>
+                            <div className="flex justify-center">
+                              <button onClick={handleSignOut} className="h-9 px-6 font-medium tracking-wide text-white transition duration-200 rounded shadow-md bg-sky-500 hover:bg-sky-600 focus:shadow-outline focus:outline-none">
+                                Logout
+                              </button>
+                            </div>
+                          </>
+                        ) : (
+                          <Link
+                            to="/"
+                            className="inline-flex items-center justify-center w-full h-12 px-6 font-medium tracking-wide text-white transition duration-200 rounded shadow-md bg-sky-500 hover:bg-sky-600 focus:shadow-outline focus:outline-none"
+                          >
+                            Login
+                          </Link>
+                        )}
                       </li>
                     </ul>
                   </nav>

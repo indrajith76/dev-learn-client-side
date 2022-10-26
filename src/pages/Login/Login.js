@@ -1,14 +1,43 @@
 import React from "react";
+import { useState } from "react";
+import { useContext } from "react";
 import { Link } from "react-router-dom";
+import Swal from "sweetalert2";
+import { AuthContext } from "../../contexts/AuthProvider";
 
 const Login = () => {
+  const { signIn } = useContext(AuthContext);
+  const [error, setError] = useState("");
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const form = event.target;
+    const email = form.email.value;
+    const password = form.password.value;
+
+    signIn(email, password)
+      .then((result) => {
+        const user = result.user;
+        form.reset();
+        setError('')
+      })
+      .catch((error) => {
+        console.log(error);
+        const errorMessage = error.message.slice(22, error.message.length - 2);
+        setError(errorMessage);
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: errorMessage,
+        });
+      });
+  };
   return (
     <div className="flex justify-center">
       <div className="w-3/4 md:w-1/2 lg:w-[35%] border border-sky-300 p-4 md:p-10 my-16 shadow-lg rounded">
         <h2 className="text-4xl text-center font-semibold text-sky-500 mb-7 mt-2">
           Login
         </h2>
-        <form action="">
+        <form onSubmit={handleSubmit}>
           <label className="block" htmlFor="email">
             Email
           </label>
@@ -21,7 +50,7 @@ const Login = () => {
             required
           />
           <label className="block" htmlFor="password">
-            Password
+            Password <small className="text-red-500">{`${error}`}</small>
           </label>
           <input
             className="border-2 w-full h-9 my-4 pl-3 outline-sky-500"
@@ -46,7 +75,10 @@ const Login = () => {
         </form>
         <hr className="mb-3" />
         <p>
-          Haven't account? <Link className="underline text-blue-700" to='/register'>Please Register</Link>
+          Haven't account?{" "}
+          <Link className="underline text-blue-700" to="/register">
+            Please Register
+          </Link>
         </p>
       </div>
     </div>
