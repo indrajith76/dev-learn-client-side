@@ -1,7 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import { useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import Swal from "sweetalert2";
 import { AuthContext } from "../../contexts/AuthProvider";
 import { BsGoogle, BsFacebook, BsGithub } from "react-icons/bs";
@@ -12,8 +12,12 @@ import {
 } from "firebase/auth";
 
 const Login = () => {
-  const { signIn, signInPopUp } = useContext(AuthContext);
+  const { signIn, signInPopUp, resetPassword } = useContext(AuthContext);
   const [error, setError] = useState("");
+
+  const navigate = useNavigate();
+  const location = useLocation();
+  const from = location?.state?.from?.pathname || "/";
 
   const googleProvider = new GoogleAuthProvider();
   const facebookProvider = new FacebookAuthProvider();
@@ -30,9 +34,9 @@ const Login = () => {
         const user = result.user;
         form.reset();
         setError("");
+        navigate(from, { replace: true });
       })
       .catch((error) => {
-        console.log(error);
         const errorMessage = error.message.slice(22, error.message.length - 2);
         setError(errorMessage);
         Swal.fire({
@@ -47,6 +51,7 @@ const Login = () => {
     signInPopUp(googleProvider)
       .then((result) => {
         const user = result.user;
+        navigate(from, { replace: true });
       })
       .catch((error) => console.error(error));
   };
@@ -55,6 +60,7 @@ const Login = () => {
     signInPopUp(facebookProvider)
       .then((result) => {
         const user = result.user;
+        navigate(from, { replace: true });
       })
       .catch((error) => console.error(error));
   };
@@ -63,18 +69,40 @@ const Login = () => {
     signInPopUp(githubProvider)
       .then((result) => {
         const user = result.user;
+        navigate(from, { replace: true });
       })
       .catch((error) => console.error(error));
   };
 
+  const handleModal = async () => {
+    const { value: email } = await Swal.fire({
+      title: "Input email address",
+      input: "email",
+      inputLabel: "Your email address",
+      inputPlaceholder: "Enter your email address",
+    });
+
+    resetPassword(email)
+      .then(() => {
+        Swal.fire(
+          "Password Reset successfully!", 
+          "Please check your email.", 
+          "success"
+          );
+      })
+      .catch(() => {
+        Swal.fire(`Failed Reset password`);
+      });
+  };
+
   return (
-    <div className="flex justify-center">
-      <div className="w-3/4 md:w-1/2 lg:w-[35%] border border-sky-300 p-4 md:p-10 my-16 shadow-lg rounded">
+    <div className="flex justify-center relative">
+      <div className="w-[85%] md:w-1/2 lg:w-[500px] border border-sky-300 p-5 md:p-10 my-16 shadow-lg rounded">
         <h2 className="text-4xl text-center font-semibold text-sky-500 mb-7 mt-2">
           Login
         </h2>
         <form onSubmit={handleSubmit}>
-          <label className="block" htmlFor="email">
+          <label className="block text-slate-600" htmlFor="email">
             Email
           </label>
           <input
@@ -85,7 +113,7 @@ const Login = () => {
             placeholder="Email"
             required
           />
-          <label className="block" htmlFor="password">
+          <label className="block text-slate-600" htmlFor="password">
             Password <small className="text-red-500">{`${error}`}</small>
           </label>
           <input
@@ -96,12 +124,6 @@ const Login = () => {
             placeholder="Password"
             required
           />
-          <p>
-            Forget password?{" "}
-            <Link to="/" className="underline text-blue-700">
-              Reset password
-            </Link>
-          </p>
           <button
             className="block mx-auto bg-sky-500 px-10 py-2 text-white font-semibold mt-5 mb-5 rounded-lg"
             type="submit"
@@ -109,10 +131,16 @@ const Login = () => {
             Login
           </button>
         </form>
+        <p className=" text-slate-600 mb-5">
+          Forget password?
+          <button onClick={handleModal} className="underline text-blue-700">
+            Reset password
+          </button>
+        </p>
         <hr className="mb-3" />
-        <p>
+        <p className="my-4 text-slate-600">
           Haven't account?
-          <Link className="underline text-blue-700" to="/register">
+          <Link className="underline text-blue-700 ml-1" to="/register">
             Please Register
           </Link>
         </p>

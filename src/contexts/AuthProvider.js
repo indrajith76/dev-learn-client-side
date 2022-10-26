@@ -7,6 +7,7 @@ import {
   createUserWithEmailAndPassword,
   getAuth,
   onAuthStateChanged,
+  sendPasswordResetEmail,
   signInWithEmailAndPassword,
   signInWithPopup,
   signOut,
@@ -19,6 +20,7 @@ const auth = getAuth(app);
 const AuthProvider = ({ children }) => {
   const [courses, setCourses] = useState([]);
   const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     fetch("https://dev-learn-server-side.vercel.app/courses")
@@ -27,6 +29,7 @@ const AuthProvider = ({ children }) => {
   }, []);
 
   const createUser = (email, password) => {
+    setLoading(true);
     return createUserWithEmailAndPassword(auth, email, password);
   };
 
@@ -35,6 +38,7 @@ const AuthProvider = ({ children }) => {
   };
 
   const signIn = (email, password) => {
+    setLoading(true);
     return signInWithEmailAndPassword(auth, email, password);
   };
 
@@ -42,13 +46,19 @@ const AuthProvider = ({ children }) => {
     return signInWithPopup(auth, provider);
   };
 
+  const resetPassword = (email) => {
+    return sendPasswordResetEmail(auth, email);
+  };
+
   const logOut = () => {
+    setLoading(true);
     return signOut(auth);
   };
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
+      setLoading(false);
     });
     return () => unsubscribe();
   }, []);
@@ -61,6 +71,8 @@ const AuthProvider = ({ children }) => {
     logOut,
     signIn,
     signInPopUp,
+    loading,
+    resetPassword
   };
   return (
     <AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>

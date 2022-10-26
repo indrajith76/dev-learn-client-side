@@ -3,12 +3,14 @@ import { useLoaderData } from "react-router-dom";
 import { BsCheck2, BsX, BsFillStarFill } from "react-icons/bs";
 import { useState } from "react";
 import Swal from "sweetalert2";
+import { useContext } from "react";
+import { AuthContext } from "../../contexts/AuthProvider";
 
 const Checkout = () => {
+  const { user } = useContext(AuthContext);
   const course = useLoaderData();
   const { id, title, author, rating, basicPrice, premiumPrice, thumbnail } =
     course;
-  console.log(course);
   const [enroll, setEnroll] = useState(false);
   const [enrollBasic, setEnrollBasic] = useState(false);
   const [enrollPremium, setEnrollPremium] = useState(false);
@@ -28,13 +30,13 @@ const Checkout = () => {
 
   const handlePremiumPrice = () => {
     Swal.fire({
-        title: "You Successfully enrolled",
-        text: "Course Name : " + title,
-        imageUrl: thumbnail,
-        imageWidth: 400,
-        imageHeight: 200,
-        imageAlt: "Custom image",
-      });
+      title: "You Successfully enrolled",
+      text: "Course Name : " + title,
+      imageUrl: thumbnail,
+      imageWidth: 400,
+      imageHeight: 200,
+      imageAlt: "Custom image",
+    });
     setEnroll(true);
     setEnrollPremium(true);
   };
@@ -42,8 +44,8 @@ const Checkout = () => {
   return (
     <div className="container mx-auto">
       <h1 className="text-center font-bold text-slate-800 text-4xl mt-3">
-        Welcome <span className="text-sky-700">indra</span>, to the checkout
-        page.
+        Welcome <span className="text-sky-700">{user?.displayName}</span>, to the
+        checkout page.
       </h1>
       <div className="md:w-3/4 lg:w-2/4 mx-auto mt-5 px-5 md:p-0">
         <img className="w-full" src={thumbnail} alt="" />

@@ -17,7 +17,7 @@ const Details = () => {
         <h1 className="text-4xl text-slate-800 font-semibold">
           Details of this course
         </h1>
-        <ReactToPdf targetRef={ref} filename="code-example.pdf" x={-30} y={.5} scale={0.8}>
+        <ReactToPdf targetRef={ref} filename="dev-learn.pdf" x={-30} y={.5} scale={0.8}>
         {({ toPdf }) => <button onClick={toPdf} className="border-2 px-5 py-2 flex items-center gap-1 hover:shadow-lg rounded-md">
           <FaRegFilePdf></FaRegFilePdf> Download PDF
         </button>}
@@ -54,7 +54,7 @@ const Details = () => {
       </div>
       <div className="flex justify-center mt-10">
         <Link to={`/checkout/${id}`}>
-          <button className="bg-red-500 w-full py-2 px-10 font-medium text-white rounded-lg">
+          <button className="bg-red-500 w-full py-4 px-10 font-medium text-white rounded-lg text-xl">
             Get Premium Access
           </button>
         </Link>

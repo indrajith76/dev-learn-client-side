@@ -7,6 +7,7 @@ import ErrorPages from "../pages/ErrorPages/ErrorPages";
 import Home from "../pages/Home/Home";
 import Login from "../pages/Login/Login";
 import Register from "../pages/Register/Register";
+import PrivateRoute from "./PrivateRoute/PrivateRoute";
 
 export const routes = createBrowserRouter([
   {
@@ -41,7 +42,11 @@ export const routes = createBrowserRouter([
       },
       {
         path: "/checkout/:courseId",
-        element: <Checkout />,
+        element: (
+          <PrivateRoute>
+            <Checkout/>
+          </PrivateRoute>
+        ),
         loader: ({ params }) =>
           fetch(
             `https://dev-learn-server-side.vercel.app/courses/${params.courseId}`
