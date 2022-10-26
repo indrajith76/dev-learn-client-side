@@ -5,13 +5,19 @@ import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
 import { AuthContext } from "../../contexts/AuthProvider";
 import { BsGoogle, BsFacebook, BsGithub } from "react-icons/bs";
-import { GoogleAuthProvider } from "firebase/auth";
+import {
+  FacebookAuthProvider,
+  GithubAuthProvider,
+  GoogleAuthProvider,
+} from "firebase/auth";
 
 const Login = () => {
-  const { signIn, googleSignIn } = useContext(AuthContext);
+  const { signIn, signInPopUp } = useContext(AuthContext);
   const [error, setError] = useState("");
 
   const googleProvider = new GoogleAuthProvider();
+  const facebookProvider = new FacebookAuthProvider();
+  const githubProvider = new GithubAuthProvider();
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -38,7 +44,23 @@ const Login = () => {
   };
 
   const handleGoogleSignIn = () => {
-    googleSignIn(googleProvider)
+    signInPopUp(googleProvider)
+      .then((result) => {
+        const user = result.user;
+      })
+      .catch((error) => console.error(error));
+  };
+
+  const handleFacebookSignIn = () => {
+    signInPopUp(facebookProvider)
+      .then((result) => {
+        const user = result.user;
+      })
+      .catch((error) => console.error(error));
+  };
+
+  const handleGithubSignIn = () => {
+    signInPopUp(githubProvider)
       .then((result) => {
         const user = result.user;
       })
@@ -100,10 +122,10 @@ const Login = () => {
             <button onClick={handleGoogleSignIn}>
               <BsGoogle />
             </button>
-            <button>
+            <button onClick={handleFacebookSignIn}>
               <BsFacebook />
             </button>
-            <button>
+            <button onClick={handleGithubSignIn}>
               <BsGithub />
             </button>
           </div>
