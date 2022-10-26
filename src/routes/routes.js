@@ -5,6 +5,8 @@ import Courses from "../pages/Courses/Courses";
 import Details from "../pages/Details/Details";
 import ErrorPages from "../pages/ErrorPages/ErrorPages";
 import Home from "../pages/Home/Home";
+import Login from "../pages/Login/Login";
+import Register from "../pages/Register/Register";
 
 export const routes = createBrowserRouter([
   {
@@ -19,8 +21,7 @@ export const routes = createBrowserRouter([
       {
         path: "/courses",
         element: <Courses></Courses>,
-        loader: () =>
-          fetch('https://dev-learn-server-side.vercel.app/courses'),
+        loader: () => fetch("https://dev-learn-server-side.vercel.app/courses"),
       },
       {
         path: "/courses/:categoryId",
@@ -32,7 +33,7 @@ export const routes = createBrowserRouter([
       },
       {
         path: "/details/:courseId",
-        element: <Details/>,
+        element: <Details />,
         loader: ({ params }) =>
           fetch(
             `https://dev-learn-server-side.vercel.app/courses/${params.courseId}`
@@ -40,11 +41,19 @@ export const routes = createBrowserRouter([
       },
       {
         path: "/checkout/:courseId",
-        element: <Checkout/>,
+        element: <Checkout />,
         loader: ({ params }) =>
           fetch(
             `https://dev-learn-server-side.vercel.app/courses/${params.courseId}`
           ),
+      },
+      {
+        path: "/login",
+        element: <Login />,
+      },
+      {
+        path: "/register",
+        element: <Register />,
       },
       {
         path: "/*",
