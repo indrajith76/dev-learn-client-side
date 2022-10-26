@@ -3,7 +3,7 @@ import "./Home.css";
 import AwesomeSlider from "react-awesome-slider";
 import "react-awesome-slider/dist/styles.css";
 import withAutoplay from "react-awesome-slider/dist/autoplay";
-import { useLoaderData, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import CourseCard from "../../components/CourseCard/CourseCard";
 import { useContext } from "react";
 import { AuthContext } from "../../contexts/AuthProvider";

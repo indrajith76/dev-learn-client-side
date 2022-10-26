@@ -6,7 +6,7 @@ import ReactToPdf from "react-to-pdf";
 
 const Details = () => {
   const course = useLoaderData();
-  const { id, title, author, rating, price, videoLink } = course;
+  const { id, title, author, rating, basicPrice, videoLink } = course;
 
   const ref = createRef();
 
@@ -42,7 +42,7 @@ const Details = () => {
         </h4>
         <div className="mt-8 flex justify-between">
           <h4 className="text-3xl font-bold text-slate-800">
-            Price : ${price}
+            Price : ${basicPrice}
           </h4>
           <p className="text-2xl font-bold text-slate-800 flex items-center gap-2">
             <span className="text-yellow-500">
