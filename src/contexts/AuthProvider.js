@@ -21,6 +21,7 @@ const AuthProvider = ({ children }) => {
   const [courses, setCourses] = useState([]);
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [isDark, setIsDark] = useState(false);
 
   useEffect(() => {
     fetch("https://dev-learn-server-side.vercel.app/courses")
@@ -72,7 +73,9 @@ const AuthProvider = ({ children }) => {
     signIn,
     signInPopUp,
     loading,
-    resetPassword
+    resetPassword,
+    isDark,
+    setIsDark,
   };
   return (
     <AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>

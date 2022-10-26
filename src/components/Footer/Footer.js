@@ -1,4 +1,4 @@
-import logo from '../../asset/logo.png'
+import logo from "../../asset/logo.png";
 
 const Footer = () => {
   return (
@@ -11,16 +11,16 @@ const Footer = () => {
             title="Company"
             className="inline-flex items-center"
           >
-            <img src={logo} alt="" />
+            <img className="w-32 lg:w-64" src={logo} alt="" />
           </a>
           <div className="mt-4 lg:max-w-sm">
             <p className="text-sm text-gray-800">
-              Sed ut perspiciatis unde omnis iste natus error sit voluptatem
-              accusantium doloremque laudantium, totam rem aperiam.
+              Build your skill with us. We provide CSE related courses for
+              students.
             </p>
             <p className="mt-4 text-sm text-gray-800">
-              Eaque ipsa quae ab illo inventore veritatis et quasi architecto
-              beatae vitae dicta sunt explicabo.
+              We have world class course. You can build a developer carrier with
+              us.
             </p>
           </div>
         </div>
