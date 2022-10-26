@@ -4,9 +4,13 @@ import { useContext } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../contexts/AuthProvider";
 
+
 const Register = () => {
-  const { createUser, updateUserProfile } = useContext(AuthContext);
+  const { createUser, updateUserProfile } =
+    useContext(AuthContext);
   const [error, setError] = useState("");
+
+  
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -56,6 +60,7 @@ const Register = () => {
         console.log(error);
       });
   };
+
 
   return (
     <div className="flex justify-center">
@@ -122,6 +127,7 @@ const Register = () => {
             Please Login
           </Link>
         </p>
+        
       </div>
     </div>
   );

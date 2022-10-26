@@ -4,10 +4,15 @@ import { useContext } from "react";
 import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
 import { AuthContext } from "../../contexts/AuthProvider";
+import { BsGoogle, BsFacebook, BsGithub } from "react-icons/bs";
+import { GoogleAuthProvider } from "firebase/auth";
 
 const Login = () => {
-  const { signIn } = useContext(AuthContext);
+  const { signIn, googleSignIn } = useContext(AuthContext);
   const [error, setError] = useState("");
+
+  const googleProvider = new GoogleAuthProvider();
+
   const handleSubmit = (event) => {
     event.preventDefault();
     const form = event.target;
@@ -18,7 +23,7 @@ const Login = () => {
       .then((result) => {
         const user = result.user;
         form.reset();
-        setError('')
+        setError("");
       })
       .catch((error) => {
         console.log(error);
@@ -31,6 +36,15 @@ const Login = () => {
         });
       });
   };
+
+  const handleGoogleSignIn = () => {
+    googleSignIn(googleProvider)
+      .then((result) => {
+        const user = result.user;
+      })
+      .catch((error) => console.error(error));
+  };
+
   return (
     <div className="flex justify-center">
       <div className="w-3/4 md:w-1/2 lg:w-[35%] border border-sky-300 p-4 md:p-10 my-16 shadow-lg rounded">
@@ -75,11 +89,25 @@ const Login = () => {
         </form>
         <hr className="mb-3" />
         <p>
-          Haven't account?{" "}
+          Haven't account?
           <Link className="underline text-blue-700" to="/register">
             Please Register
           </Link>
         </p>
+        <fieldset className="border mt-1 border-sky-200">
+          <legend className="text-center text-slate-600">Sign In with</legend>
+          <div className="flex justify-center gap-10 text-2xl my-3 text-slate-600">
+            <button onClick={handleGoogleSignIn}>
+              <BsGoogle />
+            </button>
+            <button>
+              <BsFacebook />
+            </button>
+            <button>
+              <BsGithub />
+            </button>
+          </div>
+        </fieldset>
       </div>
     </div>
   );
