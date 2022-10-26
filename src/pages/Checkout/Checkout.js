@@ -7,7 +7,7 @@ import { useContext } from "react";
 import { AuthContext } from "../../contexts/AuthProvider";
 
 const Checkout = () => {
-  const { user } = useContext(AuthContext);
+  const { user,isDark } = useContext(AuthContext);
   const course = useLoaderData();
   const { id, title, author, rating, basicPrice, premiumPrice, thumbnail } =
     course;
@@ -42,17 +42,18 @@ const Checkout = () => {
   };
 
   return (
-    <div className="container mx-auto">
-      <h1 className="text-center font-bold text-slate-800 text-4xl mt-3">
+    <div className={isDark ? "":"bg-slate-900"}>
+      <div className="container mx-auto">
+      <h1 className={`text-center font-bold ${isDark ? "text-slate-800":"text-slate-400"} text-4xl pt-3`}>
         Welcome <span className="text-sky-700">{user?.displayName}</span>, to the
         checkout page.
       </h1>
       <div className="md:w-3/4 lg:w-2/4 mx-auto mt-5 px-5 md:p-0">
         <img className="w-full" src={thumbnail} alt="" />
-        <h3 className="text-2xl mb-2">Course Name : {title}</h3>
+        <h3 className={`text-2xl mb-2 ${isDark ? "text-slate-800":"text-slate-300"}`}>Course Name : {title}</h3>
         <div className="">
-          <p>Author : {author}</p>
-          <p className="flex items-center gap-1 mt-1">
+          <p className={isDark ? "text-slate-800":"text-slate-300"}>Author : {author}</p>
+          <p className={`flex items-center gap-1 mt-1 ${isDark ? "text-slate-800":"text-slate-300"}`}>
             <span className="text-yellow-500">
               <BsFillStarFill />
             </span>
@@ -61,14 +62,14 @@ const Checkout = () => {
         </div>
       </div>
       <div
-        className="md:w-3/4 lg:w-2/4 mx-auto my-10 grid px-5 md:px-0 md:grid-cols-2 gap-5"
+        className="md:w-3/4 lg:w-2/4 mx-auto py-10 grid px-5 md:px-0 md:grid-cols-2 gap-5"
         style={{ pointerEvents: enroll ? "none" : "" }}
       >
-        <div className="border rounded-lg">
+        <div className={`border rounded-lg ${isDark ? "hover:shadow-lg":"border-sky-800 shadow-lg hover:shadow-sky-900"}`}>
           <h3 className="bg-sky-500 text-center text-3xl text-slate-200 py-1 rounded-t-lg">
             Basic ${basicPrice}
           </h3>
-          <ul className="p-3">
+          <ul className={`p-3 ${isDark ? "text-slate-800":"text-slate-300"}`}>
             <li className="text-base flex items-center gap-1 mb-2">
               <BsCheck2 className="text-xl" />
               Watch videos.
@@ -94,17 +95,17 @@ const Checkout = () => {
             <button
               onClick={handleBasicPrice}
               disabled={enrollBasic}
-              className="hover:bg-sky-400 disabled:bg-sky-400 px-8 py-1 border-2 duration-500 rounded-lg font-medium text-slate-700 hover:text-white disabled:text-white"
+              className={`hover:bg-sky-600 disabled:bg-sky-600 ${isDark ? "text-slate-700":"text-slate-300"} px-8 py-1 border-2 duration-500 rounded-lg font-medium hover:text-white disabled:text-white`}
             >
               {enrollBasic ? "Enrolled" : "Enroll Now"}
             </button>
           </div>
         </div>
-        <div className="border rounded-lg">
+        <div className={`border rounded-lg ${isDark ? "hover:shadow-lg":"border-sky-800 shadow-lg hover:shadow-sky-900"}`}>
           <h3 className="bg-sky-500 text-center text-3xl text-slate-200 py-1 rounded-t-lg">
             Premium ${premiumPrice}
           </h3>
-          <ul className="p-3">
+          <ul className={`p-3 ${isDark ? "text-slate-800":"text-slate-300"}`}>
             <li className="text-base flex items-center gap-1 mb-2">
               <BsCheck2 className="text-xl" />
               Watch videos.
@@ -130,13 +131,14 @@ const Checkout = () => {
             <button
               onClick={handlePremiumPrice}
               disabled={enrollPremium}
-              className="hover:bg-sky-400 disabled:bg-sky-400 px-8 py-1 border-2 duration-500 rounded-lg font-medium text-slate-700 hover:text-white disabled:text-white"
+              className={`hover:bg-sky-600 disabled:bg-sky-600 ${isDark ? "text-slate-700":"text-slate-300"} px-8 py-1 border-2 duration-500 rounded-lg font-medium hover:text-white disabled:text-white`}
             >
               {enrollPremium ? "Enrolled" : "Enroll Now"}
             </button>
           </div>
         </div>
       </div>
+    </div>
     </div>
   );
 };

@@ -3,10 +3,12 @@ import { useState } from "react";
 import { useEffect } from "react";
 import { useLoaderData, Link } from "react-router-dom";
 import CourseCard from "../../components/CourseCard/CourseCard";
+import { AuthContext } from "../../contexts/AuthProvider";
 
 const Courses = () => {
   const [categories, setCategories] = useState([]);
   const coursesCategory = useLoaderData();
+  const { isDark } = useContext(AuthContext);
 
   useEffect(() => {
     fetch("https://dev-learn-server-side.vercel.app/categories")
@@ -15,11 +17,11 @@ const Courses = () => {
   }, []);
 
   return (
-    <>
-      <div className="bg-white sticky top-[76px] py-1 border block md:hidden">
+    <div className={isDark ? "bg-white":"bg-slate-900"}>
+      <div className={`${isDark ? "bg-white":"bg-slate-900"} sticky top-[76px] py-1 border-y ${isDark ? "":"border-sky-900 text-slate-300"} block md:hidden`}>
         <ul className="grid grid-cols-3 gap-1">
           {categories.map((category) => (
-            <li className="border text-center" key={category.id}>
+            <li className={`border ${isDark ? "":"border-sky-900"} text-center`} key={category.id}>
               <Link className="block" to={`/courses/${category.id}`}>
                 {category.name}
               </Link>
@@ -28,11 +30,11 @@ const Courses = () => {
         </ul>
       </div>
       <div className="flex container mx-auto">
-        <div className="w-1/5 bg-white border-r hidden md:block">
+        <div className={`w-1/5 ${isDark ? "bg-slate-100":""} border-r ${isDark ? "border-slate-300":"border-sky-900"} hidden md:block`}>
           <ul>
             {categories.map((category) => (
               <li
-                className="bg-white border border-r-0 my-2 py-2 pl-5 ml-5 text-lg font-medium text-slate-800"
+                className={`${isDark ? "bg-white":"hover:shadow-lg hover:shadow-sky-900"} border border-r-0 my-2 py-2 pl-5 ml-5 text-lg font-medium ${isDark ? "text-slate-800 border-slate-300":"border-sky-900 text-slate-300"}`}
                 key={category.id}
               >
                 <Link className="block" to={`/courses/${category.id}`}>
@@ -48,7 +50,7 @@ const Courses = () => {
           ))}
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

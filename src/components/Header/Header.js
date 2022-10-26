@@ -4,7 +4,6 @@ import { Link, NavLink } from "react-router-dom";
 import { BsCircleHalf } from "react-icons/bs";
 import { useContext } from "react";
 import { AuthContext } from "../../contexts/AuthProvider";
-import { useEffect } from "react";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -22,7 +21,7 @@ const Header = () => {
 
   return (
     <div
-      className={`${isDark ? "bg-slate-100" : "bg-gray-900"} sticky top-0 z-20`}
+      className={`${isDark ? "bg-slate-100" : "bg-gray-900 shadow-sm shadow-sky-900"} sticky top-0 z-20`}
     >
       <div className="px-4 py-5 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8">
         <div className="relative flex items-center justify-between">
@@ -257,7 +256,7 @@ const Header = () => {
                           </>
                         ) : (
                           <Link
-                            to="/"
+                            to="/login"
                             className={`inline-flex items-center justify-center w-full h-12 px-6 font-medium tracking-wide text-white transition duration-200 rounded shadow-md ${isDark ? "bg-slate-500 hover:bg-slate-600":"bg-sky-500 hover:bg-sky-600"} focus:shadow-outline focus:outline-none`}
                           >
                             Login

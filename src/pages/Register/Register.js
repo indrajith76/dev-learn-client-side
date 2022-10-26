@@ -6,7 +6,7 @@ import { AuthContext } from "../../contexts/AuthProvider";
 
 
 const Register = () => {
-  const { createUser, updateUserProfile } =
+  const { createUser, updateUserProfile,isDark } =
     useContext(AuthContext);
   const [error, setError] = useState("");
 
@@ -63,13 +63,13 @@ const Register = () => {
 
 
   return (
-    <div className="flex justify-center">
-      <div className="w-[85%] md:w-[70%] lg:w-[500px] border border-sky-300 p-4 md:p-10 my-16 shadow-lg rounded">
+    <div className={`flex justify-center ${isDark ? "":"bg-slate-900"}`}>
+      <div className={`w-[85%] md:w-[70%] lg:w-[500px] border ${isDark ? "border-sky-300":"border-sky-900 shadow-sky-900"} p-4 md:p-10 my-16 shadow-lg rounded`}>
         <h2 className="text-4xl text-center font-semibold text-sky-500 mb-7 mt-2">
           Register
         </h2>
         <form onSubmit={handleSubmit}>
-          <label className="block" htmlFor="name">
+          <label className="block text-slate-600" htmlFor="name">
             Full Name
           </label>
           <input
@@ -80,7 +80,7 @@ const Register = () => {
             placeholder="Full Name"
             required
           />
-          <label className="block" htmlFor="photoURL">
+          <label className="block text-slate-600" htmlFor="photoURL">
             Photo URL
           </label>
           <input
@@ -91,7 +91,7 @@ const Register = () => {
             placeholder="Photo URL"
             required
           />
-          <label className="block" htmlFor="email">
+          <label className="block text-slate-600" htmlFor="email">
             Email
           </label>
           <input
@@ -102,7 +102,7 @@ const Register = () => {
             placeholder="Email"
             required
           />
-          <label className="block" htmlFor="password">
+          <label className="block text-slate-600" htmlFor="password">
             Password <small className="text-red-500">{error}</small>
           </label>
           <input
@@ -121,7 +121,7 @@ const Register = () => {
           </button>
         </form>
         <hr className="mb-3" />
-        <p>
+        <p className="text-slate-600">
           Have an account?
           <Link className="underline text-blue-700 ml-1" to="/login">
             Please Login

@@ -12,7 +12,7 @@ import {
 } from "firebase/auth";
 
 const Login = () => {
-  const { signIn, signInPopUp, resetPassword } = useContext(AuthContext);
+  const { signIn, signInPopUp, resetPassword,isDark } = useContext(AuthContext);
   const [error, setError] = useState("");
 
   const navigate = useNavigate();
@@ -96,8 +96,8 @@ const Login = () => {
   };
 
   return (
-    <div className="flex justify-center relative">
-      <div className="w-[85%] md:w-1/2 lg:w-[500px] border border-sky-300 p-5 md:p-10 my-16 shadow-lg rounded">
+    <div className={`flex justify-center relative ${isDark ? "":"bg-slate-900"}`}>
+      <div className={`w-[85%] md:w-1/2 lg:w-[500px] border ${isDark ? "border-sky-300":"border-sky-900 shadow-sky-900"} p-5 md:p-10 my-16 shadow-lg rounded`}>
         <h2 className="text-4xl text-center font-semibold text-sky-500 mb-7 mt-2">
           Login
         </h2>

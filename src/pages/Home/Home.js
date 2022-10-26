@@ -11,10 +11,10 @@ import { AuthContext } from "../../contexts/AuthProvider";
 const AutoplaySlider = withAutoplay(AwesomeSlider);
 
 const Home = () => {
-  const { courses } = useContext(AuthContext);
+  const { courses,isDark } = useContext(AuthContext);
   const fetureCourse = courses.slice(0, 12);
   return (
-    <div className="2xl:container mx-auto mb-20">
+    <div className={`2xl:container mx-auto ${isDark ? "bg-white":"bg-slate-900"}`}>
       <AutoplaySlider
         play={true}
         cancelOnInteraction={false} // should stop playing on user interaction
@@ -86,7 +86,7 @@ const Home = () => {
           </div>
         </div>
       </AutoplaySlider>
-      <h2 className="text-3xl md:text-5xl font-medium text-slate-800 my-5 md:my-16">
+      <h2 className={`text-3xl md:text-5xl font-medium ${isDark ? "text-slate-800":"text-slate-200"} my-5 md:my-16`}>
         Our Courses
       </h2>
 
@@ -95,9 +95,9 @@ const Home = () => {
           <CourseCard key={course.id} course={course}></CourseCard>
         ))}
       </div>
-      <div className="flex justify-center my-20">
+      <div className="flex justify-center py-20">
         <Link to="/courses">
-          <button className="bg-sky-500 w-full py-2 px-10 font-medium text-white rounded-lg">
+          <button className={`${isDark ? "bg-slate-600":"bg-sky-500"} w-full py-2 px-10 font-medium text-white rounded-lg`}>
             Visit More
           </button>
         </Link>
