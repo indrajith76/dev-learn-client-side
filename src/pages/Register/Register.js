@@ -1,16 +1,16 @@
 import React from "react";
 import { useState } from "react";
 import { useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import { AuthContext } from "../../contexts/AuthProvider";
 
-
 const Register = () => {
-  const { createUser, updateUserProfile,isDark } =
-    useContext(AuthContext);
+  const { createUser, updateUserProfile, isDark } = useContext(AuthContext);
   const [error, setError] = useState("");
 
-  
+  const navigate = useNavigate();
+  const location = useLocation();
+  const from = location?.state?.from?.pathname || "/";
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -42,6 +42,7 @@ const Register = () => {
         const user = result.user;
         console.log(user);
         handleUpdateUserProfile(name, photoURL);
+        navigate(from, { replace: true });
         form.reset();
       })
       .catch((error) => {
@@ -61,10 +62,13 @@ const Register = () => {
       });
   };
 
-
   return (
-    <div className={`flex justify-center ${isDark ? "":"bg-slate-900"}`}>
-      <div className={`w-[85%] md:w-[70%] lg:w-[500px] border ${isDark ? "border-sky-300":"border-sky-900 shadow-sky-900"} p-4 md:p-10 my-16 shadow-lg rounded`}>
+    <div className={`flex justify-center ${isDark ? "" : "bg-slate-900"}`}>
+      <div
+        className={`w-[85%] md:w-[70%] lg:w-[500px] border ${
+          isDark ? "border-sky-300" : "border-sky-900 shadow-sky-900"
+        } p-4 md:p-10 my-16 shadow-lg rounded`}
+      >
         <h2 className="text-4xl text-center font-semibold text-sky-500 mb-7 mt-2">
           Register
         </h2>
@@ -127,7 +131,6 @@ const Register = () => {
             Please Login
           </Link>
         </p>
-        
       </div>
     </div>
   );

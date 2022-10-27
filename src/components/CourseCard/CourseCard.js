@@ -11,7 +11,7 @@ const CourseCard = ({ course }) => {
     <div className={`border ${isDark ? "border-slate-300" :'border-sky-300'} p-5 rounded-lg shadow-lg ${!isDark && "hover:shadow-sky-900"}`}>
       <img className="w-full" src={thumbnail} alt="" />
       <div className="mt-3">
-        <h5 className={`text-xl font-bold ${isDark ? "text-slate-700":"text-slate-400"}`}>{title}</h5>
+        <h5 title={title} className={`text-xl font-bold ${isDark ? "text-slate-700":"text-slate-400"}`}>{title.slice(0,40)}...</h5>
         <p className={`text-lg font-semibold my-1 ${isDark ? "text-slate-700":"text-slate-400"}`}>
           Author : {author}
         </p>
