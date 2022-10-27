@@ -22,8 +22,7 @@ const AuthProvider = ({ children }) => {
   const [courses, setCourses] = useState([]);
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
-  const savedTheme = localStorage.getItem('theme') || false;
-  const [isDark, setIsDark] = useState(savedTheme);
+  const [isDark, setIsDark] = useState(false);
   
 
   useEffect(() => {
@@ -65,7 +64,7 @@ const AuthProvider = ({ children }) => {
       setLoading(false);
     });
     return () => unsubscribe();
-  }, []);
+  }, [user]);
 
   const authInfo = {
     courses,

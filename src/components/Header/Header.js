@@ -17,8 +17,6 @@ const Header = () => {
 
   const handleDarkMode = () => {
     setIsDark(!isDark);
-    const theme = !isDark
-    localStorage.setItem("theme", (!isDark));
   };
 
   return (
