@@ -17,11 +17,15 @@ const Header = () => {
 
   const handleDarkMode = () => {
     setIsDark(!isDark);
+    const theme = !isDark
+    localStorage.setItem("theme", (!isDark));
   };
 
   return (
     <div
-      className={`${isDark ? "bg-slate-100" : "bg-gray-900 shadow-sm shadow-sky-900"} sticky top-0 z-20`}
+      className={`${
+        isDark ? "bg-slate-100" : "bg-gray-900 shadow-sm shadow-sky-900"
+      } sticky top-0 z-20`}
     >
       <div className="px-4 py-5 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8">
         <div className="relative flex items-center justify-between">
@@ -33,10 +37,10 @@ const Header = () => {
               <NavLink
                 to="/"
                 style={({ isActive }) =>
-                isActive
-                  ? { color: isDark ? "#00b0ff" : "#fb8b12" }
-                  : { color: isDark ? "#1e2941" : "white" }
-              }
+                  isActive
+                    ? { color: isDark ? "#00b0ff" : "#fb8b12" }
+                    : { color: isDark ? "#1e2941" : "white" }
+                }
                 className="font-medium tracking-wide transition-colors duration-200"
                 end
               >
@@ -60,10 +64,10 @@ const Header = () => {
               <NavLink
                 to="/faq"
                 style={({ isActive }) =>
-                isActive
-                  ? { color: isDark ? "#00b0ff" : "#fb8b12" }
-                  : { color: isDark ? "#1e2941" : "white" }
-              }
+                  isActive
+                    ? { color: isDark ? "#00b0ff" : "#fb8b12" }
+                    : { color: isDark ? "#1e2941" : "white" }
+                }
                 className="font-medium tracking-wide text-gray-100 transition-colors duration-200 hover:text-teal-accent-400"
               >
                 FAQ
@@ -73,10 +77,10 @@ const Header = () => {
               <NavLink
                 to="/blogs"
                 style={({ isActive }) =>
-                isActive
-                  ? { color: isDark ? "#00b0ff" : "#fb8b12" }
-                  : { color: isDark ? "#1e2941" : "white" }
-              }
+                  isActive
+                    ? { color: isDark ? "#00b0ff" : "#fb8b12" }
+                    : { color: isDark ? "#1e2941" : "white" }
+                }
                 className="font-medium tracking-wide text-gray-100 transition-colors duration-200 hover:text-teal-accent-400"
               >
                 Blogs
@@ -86,10 +90,10 @@ const Header = () => {
               <NavLink
                 to="/about"
                 style={({ isActive }) =>
-                isActive
-                  ? { color: isDark ? "#00b0ff" : "#fb8b12" }
-                  : { color: isDark ? "#1e2941" : "white" }
-              }
+                  isActive
+                    ? { color: isDark ? "#00b0ff" : "#fb8b12" }
+                    : { color: isDark ? "#1e2941" : "white" }
+                }
                 className="font-medium tracking-wide text-gray-100 transition-colors duration-200 hover:text-teal-accent-400"
               >
                 About us
@@ -108,7 +112,11 @@ const Header = () => {
                   </Link>
                   <button
                     onClick={handleSignOut}
-                    className={`inline-flex items-center justify-center h-9 px-6 font-medium tracking-wide text-white transition duration-200 rounded shadow-md ${isDark ? "bg-slate-500 hover:bg-slate-600":"bg-sky-500 hover:bg-sky-600"} focus:shadow-outline focus:outline-none`}
+                    className={`inline-flex items-center justify-center h-9 px-6 font-medium tracking-wide text-white transition duration-200 rounded shadow-md ${
+                      isDark
+                        ? "bg-slate-500 hover:bg-slate-600"
+                        : "bg-sky-500 hover:bg-sky-600"
+                    } focus:shadow-outline focus:outline-none`}
                   >
                     Logout
                   </button>
@@ -116,7 +124,11 @@ const Header = () => {
               ) : (
                 <Link
                   to="/login"
-                  className={`inline-flex items-center justify-center h-9 px-6 font-medium tracking-wide text-white transition duration-200 rounded shadow-md ${isDark ? "bg-slate-500 hover:bg-slate-600":"bg-sky-500 hover:bg-sky-600"} focus:shadow-outline focus:outline-none`}
+                  className={`inline-flex items-center justify-center h-9 px-6 font-medium tracking-wide text-white transition duration-200 rounded shadow-md ${
+                    isDark
+                      ? "bg-slate-500 hover:bg-slate-600"
+                      : "bg-sky-500 hover:bg-sky-600"
+                  } focus:shadow-outline focus:outline-none`}
                 >
                   Login
                 </Link>
@@ -125,7 +137,9 @@ const Header = () => {
             <li>
               <span
                 onClick={handleDarkMode}
-                className={`${isDark?'#1e2941':'text-white'} cursor-pointer`}
+                className={`${
+                  isDark ? "#1e2941" : "text-white"
+                } cursor-pointer`}
               >
                 <BsCircleHalf />
               </span>
@@ -158,13 +172,14 @@ const Header = () => {
             </button>
             {isMenuOpen && (
               <div className="absolute top-0 left-0 w-full z-20">
-                <div className={`p-5 ${isDark ? "bg-slate-100" : "bg-gray-900"} border rounded shadow-sm`}>
+                <div
+                  className={`p-5 ${
+                    isDark ? "bg-slate-100" : "bg-gray-900"
+                  } border rounded shadow-sm`}
+                >
                   <div className="flex items-center justify-between mb-4">
                     <div>
-                      <Link
-                        to="/"
-                        className="inline-flex items-center"
-                      >
+                      <Link to="/" className="inline-flex items-center">
                         <img className="w-40" src={logo} alt="" />
                       </Link>
                     </div>
@@ -248,7 +263,11 @@ const Header = () => {
                             <div className="flex justify-center">
                               <button
                                 onClick={handleSignOut}
-                                className={`h-9 px-6 font-medium tracking-wide text-white transition duration-200 rounded shadow-md ${isDark ? "bg-slate-500 hover:bg-slate-600":"bg-sky-500 hover:bg-sky-600"} focus:shadow-outline focus:outline-none`}
+                                className={`h-9 px-6 font-medium tracking-wide text-white transition duration-200 rounded shadow-md ${
+                                  isDark
+                                    ? "bg-slate-500 hover:bg-slate-600"
+                                    : "bg-sky-500 hover:bg-sky-600"
+                                } focus:shadow-outline focus:outline-none`}
                               >
                                 Logout
                               </button>
@@ -257,7 +276,11 @@ const Header = () => {
                         ) : (
                           <Link
                             to="/login"
-                            className={`inline-flex items-center justify-center w-full h-12 px-6 font-medium tracking-wide text-white transition duration-200 rounded shadow-md ${isDark ? "bg-slate-500 hover:bg-slate-600":"bg-sky-500 hover:bg-sky-600"} focus:shadow-outline focus:outline-none`}
+                            className={`inline-flex items-center justify-center w-full h-12 px-6 font-medium tracking-wide text-white transition duration-200 rounded shadow-md ${
+                              isDark
+                                ? "bg-slate-500 hover:bg-slate-600"
+                                : "bg-sky-500 hover:bg-sky-600"
+                            } focus:shadow-outline focus:outline-none`}
                           >
                             Login
                           </Link>

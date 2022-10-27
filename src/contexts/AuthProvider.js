@@ -18,10 +18,13 @@ export const AuthContext = createContext();
 const auth = getAuth(app);
 
 const AuthProvider = ({ children }) => {
+  
   const [courses, setCourses] = useState([]);
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [isDark, setIsDark] = useState(false);
+  const savedTheme = localStorage.getItem('theme') || false;
+  const [isDark, setIsDark] = useState(savedTheme);
+  
 
   useEffect(() => {
     fetch("https://dev-learn-server-side.vercel.app/courses")
