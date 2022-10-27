@@ -44,13 +44,13 @@ const Checkout = () => {
   return (
     <div className={isDark ? "":"bg-slate-900"}>
       <div className="container mx-auto">
-      <h1 className={`text-center font-bold ${isDark ? "text-slate-800":"text-slate-400"} text-4xl pt-3`}>
+      <h1 className={`text-center font-bold ${isDark ? "text-slate-800":"text-slate-400"} text-xl md:text-4xl pt-3`}>
         Welcome <span className="text-sky-700">{user?.displayName}</span>, to the
         checkout page.
       </h1>
       <div className="md:w-3/4 lg:w-2/4 mx-auto mt-5 px-5 md:p-0">
         <img className="w-full" src={thumbnail} alt="" />
-        <h3 className={`text-2xl mb-2 ${isDark ? "text-slate-800":"text-slate-300"}`}>Course Name : {title}</h3>
+        <h3 className={`text-lg md:text-2xl mb-2 ${isDark ? "text-slate-800":"text-slate-300"}`}>Course Name : {title}</h3>
         <div className="">
           <p className={isDark ? "text-slate-800":"text-slate-300"}>Author : {author}</p>
           <p className={`flex items-center gap-1 mt-1 ${isDark ? "text-slate-800":"text-slate-300"}`}>

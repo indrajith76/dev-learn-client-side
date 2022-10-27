@@ -15,8 +15,8 @@ const Details = () => {
   return (
     <div className={isDark ? "":"bg-slate-900"}>
       <div className="container mx-auto pb-10" ref={ref}>
-      <div className="w-3/4 py-5 mx-auto flex justify-between items-center">
-        <h1 className={`text-4xl ${isDark ? "text-slate-800":"text-slate-300"} font-semibold`}>
+      <div className="w-3/4 py-5 mx-auto flex flex-col md:flex-row justify-between items-center gap-3">
+        <h1 className={`text-2xl md:text-4xl ${isDark ? "text-slate-800":"text-slate-300"} font-semibold`}>
           Details of this course
         </h1>
         <ReactToPdf
@@ -29,7 +29,7 @@ const Details = () => {
           {({ toPdf }) => (
             <button
               onClick={toPdf}
-              className={`border-2 px-5 py-2 flex items-center gap-1 hover:shadow-lg rounded-md ${isDark ? "":"text-slate-500 border-slate-500"}`}
+              className={`border-2 px-1 md:px-5 md:py-2 flex items-center gap-1 hover:shadow-lg rounded-md ${isDark ? "":"text-slate-500 border-slate-500"}`}
             >
               <FaRegFilePdf></FaRegFilePdf> Download PDF
             </button>
@@ -38,7 +38,7 @@ const Details = () => {
       </div>
       <iframe
         ref={ref}
-        className="w-3/4 h-[70vh] mx-auto"
+        className="md:w-3/4 md:h-[70vh] mx-auto"
         src={`${videoLink}`}
         title="YouTube video player"
         frameBorder="0"
@@ -46,18 +46,18 @@ const Details = () => {
         allowFullScreen
       ></iframe>
       <div className="w-3/4 mx-auto">
-        <h3 className={`text-4xl font-bold my-3 ${isDark ? "text-slate-800":"text-slate-300"}`}>{title}</h3>
-        <h4 className={`text-2xl mt-8 font-medium ${isDark ? "text-slate-800":"text-slate-500"} flex items-center gap-1`}>
+        <h3 className={`text-xl md:text-4xl font-bold my-3 ${isDark ? "text-slate-800":"text-slate-300"}`}>{title}</h3>
+        <h4 className={`md:text-2xl md:mt-8 font-medium ${isDark ? "text-slate-800":"text-slate-500"} flex items-center gap-1`}>
           <span className="text-gray-600">
             <FaUserCircle />
           </span>
           Author : {author}
         </h4>
-        <div className="mt-8 flex justify-between">
-          <h4 className={`text-3xl font-bold ${isDark ? "text-slate-800":"text-slate-500"}`}>
+        <div className="md:mt-8 flex justify-between">
+          <h4 className={`text-lg md:text-3xl font-bold ${isDark ? "text-slate-800":"text-slate-500"}`}>
             Price : ${basicPrice}
           </h4>
-          <p className={`text-2xl font-bold ${isDark ? "text-slate-800":"text-slate-500"} flex items-center gap-2`}>
+          <p className={`md:text-2xl font-bold ${isDark ? "text-slate-800":"text-slate-500"} flex items-center gap-2`}>
             <span className="text-yellow-500">
               <FaStar />
             </span>{" "}
@@ -67,7 +67,7 @@ const Details = () => {
       </div>
       <div className="flex justify-center mt-10">
         <Link to={`/checkout/${id}`}>
-          <button className="bg-red-500 w-full py-4 px-10 font-medium text-white rounded-lg text-xl">
+          <button className="bg-red-500 w-full px-2 py-1 md:py-4 md:px-10 font-medium text-white rounded-lg text-xl">
             Get Premium Access
           </button>
         </Link>
