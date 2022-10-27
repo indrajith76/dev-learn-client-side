@@ -4,6 +4,7 @@ import { Link, NavLink } from "react-router-dom";
 import { BsCircleHalf } from "react-icons/bs";
 import { useContext } from "react";
 import { AuthContext } from "../../contexts/AuthProvider";
+import ReactTooltip from 'react-tooltip';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -102,12 +103,13 @@ const Header = () => {
                 <div className="flex items-center gap-7">
                   <Link to="/profile">
                     <img
-                      className="w-10 rounded-full"
-                      title={user.displayName}
+                      className="w-10 rounded-full" 
+                      data-tip={user.displayName}
                       src={user?.photoURL}
                       alt=""
                     />
                   </Link>
+                  <ReactTooltip />
                   <button
                     onClick={handleSignOut}
                     className={`inline-flex items-center justify-center h-9 px-6 font-medium tracking-wide text-white transition duration-200 rounded shadow-md ${
