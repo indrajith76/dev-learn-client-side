@@ -48,7 +48,7 @@ export const routes = createBrowserRouter([
         path: "/checkout/:courseId",
         element: (
           <PrivateRoute>
-            <Checkout/>
+            <Checkout />
           </PrivateRoute>
         ),
         loader: ({ params }) =>
@@ -67,6 +67,7 @@ export const routes = createBrowserRouter([
       {
         path: "/blogs",
         element: <Blogs />,
+        loader: () => fetch("https://dev-learn-server-side.vercel.app/blogs"),
       },
       {
         path: "/profile",
